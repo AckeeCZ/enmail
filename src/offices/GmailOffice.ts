@@ -1,5 +1,5 @@
 import { defaultsDeep } from 'lodash';
-import { createTransport, SentMessageInfo } from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 import MailerMail = require('nodemailer/lib/mailer');
 import * as SMTPPool from 'nodemailer/lib/smtp-pool';
 import {ServiceType} from '../createOffice';
@@ -23,19 +23,21 @@ export interface GmailOfficeOptions {
     serviceClient?: string;
     type: GmailAuthType;
     user: string;
+    mailer?: any;
 }
 
 export class GmailOffice extends Office {
     public mailer!: MailerMail;
     constructor(options: GmailOfficeOptions) {
-        const mailer = createTransport({
+        const definedMailer = options.mailer || nodemailer;
+        const mailer = definedMailer.createTransport({
             service: ServiceType.gmail,
 
             auth: options,
         } as SMTPPool.Options);
         super(mailer);
     }
-    public send(mail: Mail): Promise<SentMessageInfo> {
+    public send(mail: Mail): Promise<nodemailer.SentMessageInfo> {
         const mailRequest = defaultsDeep({
             from: mail.from,
             subject: mail.subject,
@@ -43,7 +45,7 @@ export class GmailOffice extends Office {
             [mail.type === MailType.TEXT ? MailType.TEXT : MailType.HTML]: mail.content,
         }, mail.mailerOptions);
         return new Promise((resolve, reject) => {
-            this.mailer.sendMail(mailRequest, (err: Nullable<Error>, result: SentMessageInfo) =>
+            this.mailer.sendMail(mailRequest, (err: Nullable<Error>, result: nodemailer.SentMessageInfo) =>
                 (err ? reject(err) : resolve(result)));
         });
     }
