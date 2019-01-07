@@ -1,5 +1,7 @@
 # enmail
 
+[![Build Status](https://travis-ci.org/AckeeCZ/enmail.svg?branch=master)](https://travis-ci.org/AckeeCZ/enmail)
+
 Handles message communication with end users through various means of messages - email, sms, chat messages using uniform API.
 
 > Neither snow nor rain nor heat nor gloom of night stays these couriers from the swift completion of their appointed rounds
