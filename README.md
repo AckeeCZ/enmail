@@ -189,6 +189,15 @@ compiled({ token: '__TOKEN__' })
 
 
 ```
+
+## Development
+
+### Testing
+
+```bash
+npm run test
+```
+
 ## License
 
 This project is licensed under [MIT](./LICENSE).
