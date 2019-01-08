@@ -6,3 +6,11 @@ node_js:
 script: 
   - npm run build
   - npm run test
+deploy:
+  - provider: npm
+    email: ackeedevelopment@gmail.com
+    api_key:
+      secure: IOrySJDTjh5lc+5EtEPqJcrkrqNTo4VyZYA5dOLmqYCvN6pn5MIqAZxb0t0tMERfnNJaWCui9IfV4t8zdpqRiX0pTYjoV/lhctOtcKn00X6nPWbPp6/d1zGrxeKtmbQQLKMyp53cjO2P04z770CwiBEZ7rdfBOy6nEdkN01EsLKbpA+U2g9haTDxrcb6m5OCedb5DeFcQ6PQ8hGAfvyaMjEd1dBkHtbU8FCE0PIKgsaMgpbRR0yRyhCd7lqWEgO73iIzmYqFQO/cHxU6iHx6yIRbACQr+fZTRUpnFJtnFxR8MjS+F8lodKHxTGP7ZlWp4JsYDZNGntW7hrBa7v/4uhnHDzaztN6uDKJbfxHnxxFtdlUpQF5M3AT/8wM7a4k/e8lXFEL6kEMmy53dl2MTqgC8vMq0VFah5rfF7uglr8uWaGudT+FQcTT2rghi4RF8rmc0D6rsuHb7GhIbMx1VGxdvBh3tWYmm/sAqnfcW7BygrVeZ/nZjQ5N42B3iQp8IK1OwT+AMVzW5VQ8UmEeSttxECw1Ry9oVUcTZ2oXlOX4d9LugHYCstbOvKyP+frRorfOJVr8HTAyCDnstrYl+2JhWX55MGbwZlOXPOQ3F2rRn1jOH06AmpMOMhGTmvsLMjVpBPN75c4oCCjeoxKI/Ay/d6Njcvhrels/xiS8+fbE=
+    on:
+      tags: true
+      repo: AckeeCZ/enmail
