@@ -10,14 +10,42 @@ const nodemailerMock = require('nodemailer-mock');
 
 describe('Test createOffice', () => {
     it('Test GmailOffice', () => {
-        const gmailOptions: GmailOffice.GmailOfficeOptions = {
+        const data: GmailOffice.GmailOfficeOptions = {
             type: GmailOffice.GmailAuthType.login,
             user: 'test',
             pass: 'test',
             mailer: nodemailerMock,
         };
         return Promise.resolve()
-            .then(() => createOffice(ServiceType.gmail, gmailOptions, 'gmail'))
+            .then(() => createOffice({
+                data,
+                service: ServiceType.gmail,
+            }, 'gmail'))
+            .then(() => {
+                expect(instances.get('gmail'));
+                return instances.get('gmail')!;
+            })
+            .then(instance => instance.office.send({
+                to: 'enmail@example.com',
+                from: 'test@example.com',
+                subject: 'Test email',
+                type: MailType.HTML,
+                content: '<h1>Hello from enmail!</h1>',
+            }))
+            .then(response => expect(response));
+    });
+    it('Test GmailOffice', () => {
+        const data: GmailOffice.GmailOfficeOptions = {
+            type: GmailOffice.GmailAuthType.login,
+            user: 'test',
+            pass: 'test',
+            mailer: nodemailerMock,
+        };
+        return Promise.resolve()
+            .then(() => createOffice({
+                data,
+                service: ServiceType.gmail,
+            }, 'gmail'))
             .then(() => {
                 expect(instances.get('gmail'));
                 return instances.get('gmail')!;
@@ -32,11 +60,14 @@ describe('Test createOffice', () => {
             .then(response => expect(response));
     });
     it('Test FcmOffice', () => {
-        const fcmOptions: FcmOffice.FcmOfficeOptions = {
+        const data: FcmOffice.FcmOfficeOptions = {
             authorizationKey: '123456789',
         };
         return Promise.resolve()
-            .then(() => createOffice(ServiceType.fcm, fcmOptions, 'fcm'))
+            .then(() => createOffice({
+                data,
+                service: ServiceType.fcm
+            }, 'fcm'))
             .then(() => {
                 expect(instances.get('fcm'));
                 return instances.get('fcm')!;
@@ -57,12 +88,15 @@ describe('Test createOffice', () => {
             .then(response => expect(response));
     });
     it('Test OnesignalOffice', () => {
-        const onesignalOptions: OnesignalOffice.OnesignalOfficeOptions = {
+        const data: OnesignalOffice.OnesignalOfficeOptions = {
             appId: '123',
             apiKey: 'key',
         };
         return Promise.resolve()
-            .then(() => createOffice(ServiceType.onesignal, onesignalOptions, 'onesignal'))
+            .then(() => createOffice({
+                data,
+                service: ServiceType.onesignal
+            }, 'onesignal'))
             .then(() => {
                 expect(instances.get('onesignal'));
                 return instances.get('onesignal')!;
@@ -83,11 +117,14 @@ describe('Test createOffice', () => {
             .then(response => expect(response));
     });
     it('Test SendgridOffice', () => {
-        const sendgridOptions: SendgridOffice.SendgridOfficeOptions = {
+        const data: SendgridOffice.SendgridOfficeOptions = {
             apiKey: 'key',
         };
         return Promise.resolve()
-            .then(() => createOffice(ServiceType.sendgrid, sendgridOptions, 'sendgrid'))
+            .then(() => createOffice({
+                data,
+                service: ServiceType.sendgrid,
+            }, 'sendgrid'))
             .then(() => {
                 expect(instances.get('sendgrid'));
                 return instances.get('sendgrid')!;
