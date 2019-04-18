@@ -72,7 +72,7 @@ getOffice()
         serviceClient?: string;
         type: GmailAuthType; // login or oauth2 - enum
         user: string;
-        mailer: any;
+        mailer?: any;
     }
     ```
 
