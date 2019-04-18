@@ -12,7 +12,7 @@ export const withDefaultContext = (context: any = {}) => {
 
     const defaultContext: object = {
         // common var for translation
-        _: ((...args: any[]) => (context.__ ? context.__(...args) : String(args))),
+        __: ((...args: any[]) => (context.__ ? context.__(...args) : String(args))),
         currencyFormat: (n: any, currency: any) => {
             const decimals = 2;
             if (!currency) {
