@@ -1,9 +1,8 @@
+import sendgrid = require('@sendgrid/mail');
 import { defaultsDeep } from 'lodash';
 import { RequestResponse } from 'request';
 import { Mail, MailType } from '../Mail';
 import { Office } from './Office';
-
-const sendgrid = require('@sendgrid/mail');
 
 export interface SendgridOfficeOptions {
     apiKey: string;
@@ -17,7 +16,7 @@ export class SendgridOffice extends Office {
     public mailer!: SendgridMailer;
     constructor(options: SendgridOfficeOptions) {
         sendgrid.setApiKey(options.apiKey);
-        super(sendgrid);
+        super(sendgrid as unknown as SendgridMailer);
     }
     public send(mail: Mail): Promise<[RequestResponse, {}]> {
         const mailRequest = defaultsDeep({

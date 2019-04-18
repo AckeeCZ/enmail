@@ -1,19 +1,20 @@
-import {expect} from 'chai';
-import {createOffice, instances, ServiceType} from '../../createOffice';
-import {MailType} from '../../Mail';
+import { expect } from 'chai';
+import { createOffice, instances, ServiceType } from '../../createOffice';
+import { MailType } from '../../Mail';
 import * as FcmOffice from '../../offices/FcmOffice';
 import * as GmailOffice from '../../offices/GmailOffice';
 import * as OnesignalOffice from '../../offices/OnesignalOffice';
 import * as SendgridOffice from '../../offices/SendgridOffice';
 
+// tslint:disable-next-line
 const nodemailerMock = require('nodemailer-mock');
 
 describe('Test createOffice', () => {
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
+            pass: 'test',
             type: GmailOffice.GmailAuthType.login,
             user: 'test',
-            pass: 'test',
             mailer: nodemailerMock,
         };
         return Promise.resolve()
@@ -26,19 +27,19 @@ describe('Test createOffice', () => {
                 return instances.get('gmail')!;
             })
             .then(instance => instance.office.send({
-                to: 'enmail@example.com',
                 from: 'test@example.com',
-                subject: 'Test email',
-                type: MailType.HTML,
                 content: '<h1>Hello from enmail!</h1>',
+                subject: 'Test email',
+                to: 'enmail@example.com',
+                type: MailType.HTML,
             }))
             .then(response => expect(response));
     });
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
+            pass: 'test',
             type: GmailOffice.GmailAuthType.login,
             user: 'test',
-            pass: 'test',
             mailer: nodemailerMock,
         };
         return Promise.resolve()
@@ -51,11 +52,11 @@ describe('Test createOffice', () => {
                 return instances.get('gmail')!;
             })
             .then(instance => instance.office.send({
-                to: 'enmail@example.com',
                 from: 'test@example.com',
-                subject: 'Test email',
-                type: MailType.HTML,
                 content: '<h1>Hello from enmail!</h1>',
+                subject: 'Test email',
+                to: 'enmail@example.com',
+                type: MailType.HTML,
             }))
             .then(response => expect(response));
     });
@@ -66,53 +67,53 @@ describe('Test createOffice', () => {
         return Promise.resolve()
             .then(() => createOffice({
                 data,
-                service: ServiceType.fcm
+                service: ServiceType.fcm,
             }, 'fcm'))
             .then(() => {
                 expect(instances.get('fcm'));
                 return instances.get('fcm')!;
             })
             .then(instance => instance.office.send({
-                to: 'abc123',
                 from: '123abc',
-                subject: 'Test notification',
                 content: 'Hello from enmail!',
-                type: MailType.TEXT,
                 mailerOptions: {
-                    notification: null,
                     data: {
                         notificationId: 1,
                     },
+                    notification: null,
                 },
+                subject: 'Test notification',
+                to: 'abc123',
+                type: MailType.TEXT,
             }))
             .then(response => expect(response));
     });
     it('Test OnesignalOffice', () => {
         const data: OnesignalOffice.OnesignalOfficeOptions = {
-            appId: '123',
             apiKey: 'key',
+            appId: '123',
         };
         return Promise.resolve()
             .then(() => createOffice({
                 data,
-                service: ServiceType.onesignal
+                service: ServiceType.onesignal,
             }, 'onesignal'))
             .then(() => {
                 expect(instances.get('onesignal'));
                 return instances.get('onesignal')!;
             })
             .then(instance => instance.office.send({
-                to: 'abc123',
                 from: '123abc',
-                subject: 'Test notification',
                 content: 'Hello from enmail!',
-                type: MailType.TEXT,
                 mailerOptions: {
-                    notification: null,
                     data: {
                         notificationId: 1,
                     },
+                    notification: null,
                 },
+                subject: 'Test notification',
+                to: 'abc123',
+                type: MailType.TEXT,
             }))
             .then(response => expect(response));
     });
@@ -130,11 +131,11 @@ describe('Test createOffice', () => {
                 return instances.get('sendgrid')!;
             })
             .then(instance => instance.office.send({
-                to: 'enmail@example.com',
                 from: 'test@example.com',
-                subject: 'Test email',
-                type: MailType.HTML,
                 content: '<h1>Hello from enmail!</h1>',
+                subject: 'Test email',
+                to: 'enmail@example.com',
+                type: MailType.HTML,
             }))
             .then(response => expect(response));
     });

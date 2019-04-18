@@ -1,9 +1,6 @@
+import intl = require('intl');
 import { defaults } from 'lodash';
-
-
-const intl = require('intl');
-const moment = require('moment');
-require('moment-timezone');
+import moment = require('moment');
 
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';

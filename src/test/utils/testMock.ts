@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import * as nock from 'nock';
 
 // expect all URLs
