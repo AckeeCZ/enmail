@@ -193,10 +193,24 @@ compiled({ token: '__TOKEN__' })
 
 ## Development
 
+### Build
+
+```bash
+npm run build
+```
+
+It runs `tsc -p .`
+
 ### Testing
 
 ```bash
 npm run test
+```
+
+### Lint
+
+```bash
+npm run lint
 ```
 
 ## License
