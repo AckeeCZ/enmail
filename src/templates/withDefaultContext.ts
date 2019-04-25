@@ -7,7 +7,7 @@ export const withDefaultContext = (context: any = {}) => {
     const defaultTz = context.tz || 'UTC';
     const dateTimeFormat = { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric' };
 
-    const defaultContext: object = {
+    const defaultContext = {
         // common var for translation
         __: ((...args: any[]) => (context.__ ? context.__(...args) : String(args))),
         currencyFormat: (n: any, currency: any) => {
