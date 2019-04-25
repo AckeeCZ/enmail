@@ -2,16 +2,16 @@ import { get } from 'lodash';
 import { instances } from './createOffice';
 import { Office } from './offices/Office';
 
-export * from './createOffice';
-export * from './Mail';
-export * from './offices/FcmOffice';
-export * from './offices/GmailOffice';
-export * from './offices/OnesignalOffice';
-export * from './offices/Office';
-export * from './offices/SendgridOffice';
-export * from './templates/compileLodashFileTemplate';
-export * from './templates/compileLodashTemplate';
-export * from './templates/withDefaultContext';
+export { createOffice, ServiceOptions, ServiceType, WrappedOffice } from './createOffice';
+export { Mail, MailType } from './Mail';
+export { FcmMailer, FcmOffice, FcmOfficeOptions } from './offices/FcmOffice';
+export { GmailAuthType, GmailOffice, GmailOfficeOptions } from './offices/GmailOffice';
+export { OnesignalMailer, OnesignalOffice, OnesignalOfficeOptions } from './offices/OnesignalOffice';
+export { Mailer, Office, OfficeOptions, OfficeResult } from './offices/Office';
+export { SendgridMailer, SendgridOffice, SendgridOfficeOptions } from './offices/SendgridOffice';
+export { compileLodashFileTemplate } from './templates/compileLodashFileTemplate';
+export { compileLodashTemplate } from './templates/compileLodashTemplate';
+export { withDefaultContext } from './templates/withDefaultContext';
 
 declare global {
     type Nullable<T> = T | null;
