@@ -1,4 +1,4 @@
-import intl = require('intl');
+import * as intl from 'intl';
 import { defaults } from 'lodash';
 import moment = require('moment');
 
