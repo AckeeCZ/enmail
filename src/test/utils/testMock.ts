@@ -1,10 +1,12 @@
+
 import * as nock from 'nock';
 
+const logger = console;
 // expect all URLs
 const mock = nock(/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/)
     .persist();
 
-console.log(`Listening ...`);
+logger.log(`Listening ...`);
 
 mock.post('/fcm/send')
     .reply(200);

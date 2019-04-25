@@ -13,27 +13,49 @@ export enum ServiceType {
     onesignal = 'onesignal',
 }
 
+export type ServiceOptions = {
+    service: ServiceType;
+    data: OfficeOptions;
+} & (
+    | {
+        service: ServiceType.fcm;
+        data: FcmOfficeOptions;
+    }
+    | {
+        service: ServiceType.gmail;
+        data: GmailOfficeOptions;
+    }
+    | {
+        service: ServiceType.onesignal;
+        data: OnesignalOfficeOptions;
+    }
+    | {
+        service: ServiceType.sendgrid;
+        data: SendgridOfficeOptions;
+    });
+
 export interface WrappedOffice {
     office: Office;
-    compileLodashTemplate(templateString: string, context: any): any;
+    compileLodashTemplate: (templateString: string, context: any) => (...args: any[]) => string;
 }
 
 export const instances: Map<string, WrappedOffice> = new Map();
 
-export const createOffice = (service: ServiceType, instanceOptions: OfficeOptions, ident: string = 'default'): void => {
+export const createOffice = (options: ServiceOptions, ident: string = 'default') => {
     const office: Office = (() => {
         /* eslint-disable global-require */
-        switch (service) {
+        switch (options.service) {
             case ServiceType.gmail:
-                return new GmailOffice(instanceOptions as GmailOfficeOptions);
+                return new GmailOffice(options.data);
             case ServiceType.fcm:
-                return new FcmOffice(instanceOptions as FcmOfficeOptions);
+                return new FcmOffice(options.data);
             case ServiceType.sendgrid:
-                return new SendgridOffice(instanceOptions as SendgridOfficeOptions);
+                return new SendgridOffice(options.data);
             case ServiceType.onesignal:
-                return new OnesignalOffice(instanceOptions as OnesignalOfficeOptions);
+                return new OnesignalOffice(options.data);
             default:
-                throw new Error(`Unsupported mail service ${service}`);
+                // @ts-ignore
+                throw new Error(`Unsupported mail service ${options.service}`);
         }
         /* eslint-disable global-require */
     })();

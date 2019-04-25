@@ -18,81 +18,89 @@ npm i --save enmail
 
 ## Quickstart
 
-```javascript
-
-const {
-    // Creates an office given the options, see below, and saves
-    // instance under given key. If none key given, is saved under a default name.
+```typescript
+import {
     createOffice,
-    // Gets office by key. Called without parameters, gets the default instance.
     getOffice,
-    // Mail objet providing universal message container used throughout
-    // all the offices
+    GmailAuthType,
     Mail,
-} = require('enmail');
+    MailType,
+    ServiceType 
+} from 'enmail';
 
-const office = createOffice(
-    'gmail',
-    { user: '...', password: '...' }
-);
-
-const mail = new Mail();
-mail.from = 'senderContact';
-mail.to = 'receiverContact';
-mail.subject = 'mesasgeSubject';
-mail.content = 'messageTextContent';
-mail.type = Mail.TYPE; // Mail.HTML
-
-getOffice().send(mail)
+// Creates an office given the options, see below, and saves
+// instance under given key. If none key given, is saved under a 'default' name.
+createOffice({
+    service: ServiceType.gmail,
+    data: {
+        type: GmailAuthType.login, // GmailAuthType.oauth2
+        user: 'test@gmail.com',
+        pass: '******',
+    },
+});
+// Mail object providing universal message container used throughout
+// all the offices
+const mail: Mail = {
+    from: 'me@gmail.com',
+    to: 'example@test.org',
+    type: MailType.HTML, // MailType.TEXT
+    subject: 'Hello, its me',
+    content: `<p>I was wondering if after all these years you'd like to meet to go over everything ...</p>`,
+    // optional: mailerOptions
+};
+// Gets office by key. Called without parameters, gets the default instance.
+getOffice()
+    .send(mail)
+    .then(res => /* ... */)
+    .catch(e => /* ... */)
+// ...
 ```
-
 
 ## Supported transports and ini options
 
- - `gmail`
-    ```js
+- `gmail` (`GmailOfficeOptions`)
+    ```typescript
     {
-        user: String,
-        password: String
+        accessToken?: string;
+        accessUrl?: string;
+        clientId?: string;
+        clientSecret?: string;
+        expires?: number;
+        pass?: string;
+        privateKey?: string;
+        refreshToken?: string;
+        serviceClient?: string;
+        type: GmailAuthType; // login or oauth2 - enum
+        user: string;
+        mailer?: any;
     }
     ```
- - `sendgrid`
-    ```js
+
+- `sendgrid` (`SendgridOfficeOptions`)
+    ```typescript
     {
-        apiKey: String
+        apiKey: string;
     }
     ```
- - `profisms`
-    ```javascript
+
+- `onesignal` (`OnesignalOfficeOptions`)
+    ```typescript
     {
-        environment: 'test' | 'sms'
-        service: 'general' | 'sms' // https://document.profisms.cz/index.php?CTRL=api_common
-        login: String,
-        password: String,
-        source: String, // optional, default is ProfiSMS phone number, possible values are registered phone number or registered text ID, https://document.profisms.cz/index.php?CTRL=api_sms
-        currency: String // optional, default is CZK
-        debug: false, // optional, default is false
-        logger: function // optional, default is console
+        apiKey: string;
+        appId: string;
     }
     ```
- - (N/A) `slack?`
- - `fcm`
-    ```js
+
+- `fcm` (`FcmOfficeOptions`)
+    ```typescript
     {
-        authorizationKey: String
-    }
-    ```
-- `onesignal`
-    ```js
-    {
-        apiKey: String,
-        appId: String
+        authorizationKey: string;
     }
     ```
 
 ### FCM
 
-```js
+```typescript
 // Channel send: Recipient `channel=<channelName>`
 send({ to: `channel=myChannelName`/*, ...*/ });
 // Device notification (registration ids). May be an array.
@@ -101,7 +109,7 @@ send({ to: `3qwesdfzklxc`/*, ...*/ });
 `Mail.subject` is used as the `notification.title`, `Mail.body` as the message `notification.content`.
 
 Any other options that should be passed to request should be put to `Mail.mailerOptions`. Those are merged with the root of fcm request. E.g., to supply data and sound, use
-```js
+```typescript
 mail.mailerOptions = {
     data: {/* ... */},
     notification: { sound: 'default' }
@@ -112,21 +120,23 @@ If you dont want to use the `notification` object, you can set it on `null` then
 
 ### OneSignal
 
-```js
+```typescript
 // Channel/Segment send: Recipient `channel=<channelName>`. May be an array.
 send({ to: `channel=myChannelName`/*, ...*/ });
 // Device notification (player ids). May be an array.
 send({ to: `3qwesdfzklxc`/*, ...*/ });
 ```
 Any other options that should be passed to request should be put to `Mail.mailerOptions`. Those are merged with the root of OneSignal request body. E.g., to supply filters and sound, use
-```js
+```typescript
 mail.mailerOptions = {
     filters: [/* ... */],
     android_sound: 'default',
 }
 ```
 
+### Sendgrid
 
+Would be same as `gmail`, you only need to change `ServiceType.gmail` and add your `apiKey`
 
 ## Concept
 
@@ -134,15 +144,10 @@ Formerly an email sender, generally a message sender. Emails - electronic mails,
 
 Office have to be built first. Once built, offce can _send_ a message.
 
-
-## Helpers
-
-
 ### Templates
 
-```javascript
-
-const {
+```typescript
+import {
     // (templateString, context) Given template string
     // (https://lodash.com/docs/4.17.4#template) and variables, function compiles
     // this template and can later be used to create a message from that template
@@ -152,7 +157,8 @@ const {
     compileLodashTemplate,
     // Same as above only templateString is a filename to that template
     compileLodashFileTemplate,
-} = require('enmail');
+    Mail }
+from 'enmail';
 
 /*
     variables automatically exposed to be used in a template
@@ -177,8 +183,7 @@ const templateString = `
     </body>
 </html>
 `
-const compiled = compileLodashTemplate(templateString, { url: 'http://api' })
-compiled({ token: '__TOKEN__' })
+const compiled = compileLodashTemplate(templateString, { url: 'http://api', token: '__TOKEN__' })
 // <!DOCTYPE html>
 // <html>
 //     <body>
@@ -186,17 +191,33 @@ compiled({ token: '__TOKEN__' })
 //         http://api?token=__TOKEN__
 //     </body>
 // </html>
-
-
-
+const mail: Mail = {
+    // ...
+    content: compiled(),
+    // ...
+};
 ```
 
 ## Development
+
+### Build
+
+```bash
+npm run build
+```
+
+It runs `tsc -p .`
 
 ### Testing
 
 ```bash
 npm run test
+```
+
+### Lint
+
+```bash
+npm run lint
 ```
 
 ## License

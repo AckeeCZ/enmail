@@ -1,18 +1,15 @@
+import * as intl from 'intl';
 import { defaults } from 'lodash';
-
-
-const intl = require('intl');
-const moment = require('moment');
-require('moment-timezone');
+import * as moment from 'moment';
 
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';
     const defaultTz = context.tz || 'UTC';
     const dateTimeFormat = { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric' };
 
-    const defaultContext: object = {
+    const defaultContext = {
         // common var for translation
-        _: ((...args: any[]) => (context.__ ? context.__(...args) : String(args))),
+        __: ((...args: any[]) => (context.__ ? context.__(...args) : String(args))),
         currencyFormat: (n: any, currency: any) => {
             const decimals = 2;
             if (!currency) {

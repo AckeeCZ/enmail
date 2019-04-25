@@ -32,7 +32,6 @@ export class GmailOffice extends Office {
         const definedMailer = options.mailer || nodemailer;
         const mailer = definedMailer.createTransport({
             service: ServiceType.gmail,
-
             auth: options,
         } as SMTPPool.Options);
         super(mailer);

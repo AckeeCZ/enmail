@@ -1,20 +1,21 @@
-import { createOffice, instances, ServiceType } from './createOffice';
-import * as Mail from './Mail';
-import { GmailAuthType } from './offices/GmailOffice';
-import { compileLodashFileTemplate } from './templates/compileLodashFileTemplate';
-import * as compileLodashTemplate from './templates/compileLodashTemplate';
+import { get } from 'lodash';
+import { instances } from './createOffice';
+import { Office } from './offices/Office';
+
+export { createOffice, ServiceOptions, ServiceType, WrappedOffice } from './createOffice';
+export { Mail, MailType } from './Mail';
+export { FcmMailer, FcmOffice, FcmOfficeOptions } from './offices/FcmOffice';
+export { GmailAuthType, GmailOffice, GmailOfficeOptions } from './offices/GmailOffice';
+export { OnesignalMailer, OnesignalOffice, OnesignalOfficeOptions } from './offices/OnesignalOffice';
+export { Mailer, Office, OfficeOptions, OfficeResult } from './offices/Office';
+export { SendgridMailer, SendgridOffice, SendgridOfficeOptions } from './offices/SendgridOffice';
+export { compileLodashFileTemplate } from './templates/compileLodashFileTemplate';
+export { compileLodashTemplate } from './templates/compileLodashTemplate';
+export { withDefaultContext } from './templates/withDefaultContext';
 
 declare global {
     type Nullable<T> = T | null;
 }
 
-export = {
-    compileLodashFileTemplate,
-    compileLodashTemplate,
-    GmailAuthType,
-    Mail,
-    ServiceType,
-
-    createOffice,
-    getOffice: (ident: string) => instances.get(ident),
-};
+export const getWrappedOffice = (ident?: string) => instances.get(ident || 'default');
+export const getOffice = (ident?: string) => get(instances.get(ident || 'default'), 'office') as Office;
