@@ -23,7 +23,7 @@
     "@types/request": "^2.47.1",
     "@types/request-promise": "^4.1.42",
     "intl": "^1.2.5",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.14",
     "nodemailer": "4.6.3",
