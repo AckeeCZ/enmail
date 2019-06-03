@@ -27,7 +27,7 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.14",
     "nodemailer": "4.6.3",
-    "request": "^2.87.0",
+    "request": "2.88.0",
     "request-promise": "^4.2.2",
     "typescript": "^3.4.3"
   },
