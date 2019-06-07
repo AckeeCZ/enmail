@@ -13,9 +13,5 @@ export { compileLodashFileTemplate } from './templates/compileLodashFileTemplate
 export { compileLodashTemplate } from './templates/compileLodashTemplate';
 export { withDefaultContext } from './templates/withDefaultContext';
 
-declare global {
-    type Nullable<T> = T | null;
-}
-
 export const getWrappedOffice = (ident?: string) => instances.get(ident || 'default');
 export const getOffice = (ident?: string) => get(instances.get(ident || 'default'), 'office') as Office;
