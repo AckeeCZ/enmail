@@ -14,6 +14,13 @@ Handles message communication with end users through various means of messages -
 npm i --save enmail
 ```
 
+## Supported services, their settings and examples
+
+- [Gmail](./GMAIL.md)
+- [Sendgrid](./SENDGRID.md)
+- [Firebase Cloud Messaging](./FCM.md)
+- [OneSignal](./ONESIGNAL.md)
+
 ## Quickstart
 
 ```typescript
@@ -53,18 +60,6 @@ getOffice()
     .catch(e => /* ... */)
 // ...
 ```
-
-## Supported services, their settings and examples
-
-- [Gmail](./GMAIL.md)
-- [Sendgrid](./SENDGRID.md)
-- [Firebase Cloud Messaging](./FCM.md)
-- [OneSignal](./ONESIGNAL.md)
-
-## Used packages
-
-- `nodemailer` - [https://nodemailer.com/about/](https://nodemailer.com/about/)
-- `@sendgrid/mail` - [https://www.npmjs.com/package/@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail)
 
 ## Concept
 
@@ -125,6 +120,11 @@ const mail: Mail = {
     // ...
 };
 ```
+
+## Used packages
+
+- `nodemailer` - [https://nodemailer.com/about/](https://nodemailer.com/about/)
+- `@sendgrid/mail` - [https://www.npmjs.com/package/@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail)
 
 ## Development
 
