@@ -12,9 +12,11 @@ const nodemailerMock = require('nodemailer-mock');
 describe('Test createOffice', () => {
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
-            pass: 'test',
-            type: GmailOffice.GmailAuthType.login,
-            user: 'test',
+            authType: GmailOffice.GmailAuthType.login,
+            settings: {
+                user: 'test',
+                pass: 'test',
+            },
             mailer: nodemailerMock,
         };
         return Promise.resolve()
@@ -37,9 +39,11 @@ describe('Test createOffice', () => {
     });
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
-            pass: 'test',
-            type: GmailOffice.GmailAuthType.login,
-            user: 'test',
+            authType: GmailOffice.GmailAuthType.login,
+            settings: {
+                user: 'test',
+                pass: 'test',
+            },
             mailer: nodemailerMock,
         };
         return Promise.resolve()
