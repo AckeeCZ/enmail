@@ -15,23 +15,23 @@ export enum ServiceType {
 
 export type ServiceOptions = {
     service: ServiceType;
-    data: OfficeOptions;
+    settings: OfficeOptions;
 } & (
     | {
         service: ServiceType.fcm;
-        data: FcmOfficeOptions;
+        settings: FcmOfficeOptions;
     }
     | {
         service: ServiceType.gmail;
-        data: GmailOfficeOptions;
+        settings: GmailOfficeOptions;
     }
     | {
         service: ServiceType.onesignal;
-        data: OnesignalOfficeOptions;
+        settings: OnesignalOfficeOptions;
     }
     | {
         service: ServiceType.sendgrid;
-        data: SendgridOfficeOptions;
+        settings: SendgridOfficeOptions;
     });
 
 export interface WrappedOffice {
@@ -46,13 +46,13 @@ export const createOffice = (options: ServiceOptions, ident: string = 'default')
         /* eslint-disable global-require */
         switch (options.service) {
             case ServiceType.gmail:
-                return new GmailOffice(options.data);
+                return new GmailOffice(options.settings);
             case ServiceType.fcm:
-                return new FcmOffice(options.data);
+                return new FcmOffice(options.settings);
             case ServiceType.sendgrid:
-                return new SendgridOffice(options.data);
+                return new SendgridOffice(options.settings);
             case ServiceType.onesignal:
-                return new OnesignalOffice(options.data);
+                return new OnesignalOffice(options.settings);
             default:
                 // @ts-ignore
                 throw new Error(`Unsupported mail service ${options.service}`);

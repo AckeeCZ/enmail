@@ -19,7 +19,7 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
+                settings: data,
                 service: ServiceType.gmail,
             }, 'gmail'))
             .then(() => {
@@ -44,7 +44,7 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
+                settings: data,
                 service: ServiceType.gmail,
             }, 'gmail'))
             .then(() => {
@@ -66,7 +66,7 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
+                settings: data,
                 service: ServiceType.fcm,
             }, 'fcm'))
             .then(() => {
@@ -95,7 +95,7 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
+                settings: data,
                 service: ServiceType.onesignal,
             }, 'onesignal'))
             .then(() => {
@@ -123,7 +123,7 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
+                settings: data,
                 service: ServiceType.sendgrid,
             }, 'sendgrid'))
             .then(() => {
