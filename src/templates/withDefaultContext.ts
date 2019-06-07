@@ -1,6 +1,8 @@
 import * as intl from 'intl';
 import { defaults } from 'lodash';
-import * as moment from 'moment';
+
+// tslint:disable-next-line:no-var-requires
+const { formatToTimeZone } = require('date-fns-timezone');
 
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';
@@ -38,11 +40,12 @@ export const withDefaultContext = (context: any = {}) => {
 };
 
 const shiftUtcDate = (d: any, t: any) => {
+    const dateFormat = 'YYYY-MM-DD HH:mm:ss';
     if (!d) {
         return d;
     }
     if (t) {
-        return new Date(moment.utc(d).tz(t).format('YYYY-MM-DD HH:mm:ss'));
+        return new Date(formatToTimeZone(d, dateFormat, { timeZone: t }));
     }
-    return new Date(moment.utc(d).format('YYYY-MM-DD HH:mm:ss'));
+    return new Date(d);
 };
