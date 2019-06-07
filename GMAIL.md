@@ -10,17 +10,28 @@
 
 ```typescript
 {
-    accessToken?: string;
-    accessUrl?: string;
-    clientId?: string;
-    clientSecret?: string;
-    expires?: number;
-    pass?: string;
-    privateKey?: string;
-    refreshToken?: string;
-    serviceClient?: string;
-    type: GmailAuthType; // login or oauth2 - enum
-    user: string;
+    authType: GmailAuthType;        // "login" or "oauth2" - enum
+    settings: GmailAuthOptions;
     mailer?: any;
+}
+```
+
+- When you choose `login` as `authType` then your settings should looks like:
+
+```typescript
+{
+    user: string;
+    pass: string;
+}
+```
+
+- Or when you choose `oauth2`:
+
+```typescript
+{
+    user: string;
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
 }
 ```
