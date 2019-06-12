@@ -1,8 +1,6 @@
+import { formatToTimeZone } from 'date-fns-timezone';
 import * as intl from 'intl';
 import { defaults } from 'lodash';
-
-// tslint:disable-next-line:no-var-requires
-const { formatToTimeZone } = require('date-fns-timezone');
 
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';
