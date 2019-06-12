@@ -43,7 +43,6 @@ export const instances: Map<string, WrappedOffice> = new Map();
 
 export const createOffice = (options: ServiceOptions, ident: string = 'default') => {
     const office: Office = (() => {
-        /* eslint-disable global-require */
         switch (options.service) {
             case ServiceType.gmail:
                 return new GmailOffice(options.settings);
@@ -57,7 +56,6 @@ export const createOffice = (options: ServiceOptions, ident: string = 'default')
                 // @ts-ignore
                 throw new Error(`Unsupported mail service ${options.service}`);
         }
-        /* eslint-disable global-require */
     })();
     const wrappedOffice = wrapOffice(office);
     instances.set(ident, wrappedOffice);
