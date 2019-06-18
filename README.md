@@ -37,10 +37,12 @@ import {
 // instance under given key. If none key given, is saved under a 'default' name.
 createOffice({
     service: ServiceType.gmail,
-    data: {
-        type: GmailAuthType.login, // GmailAuthType.oauth2
-        user: 'test@gmail.com',
-        pass: '******',
+    settings: {
+        authType: GmailAuthType.login, // GmailAuthType.oauth2
+        settings: {
+            user: 'test@gmail.com',
+            pass: '******',
+        },
     },
 });
 // Mail object providing universal message container used throughout
