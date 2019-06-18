@@ -121,11 +121,6 @@ const mail: Mail = {
 };
 ```
 
-## Used packages
-
-- `nodemailer` - [https://nodemailer.com/about/](https://nodemailer.com/about/)
-- `@sendgrid/mail` - [https://www.npmjs.com/package/@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail)
-
 ## Development
 
 ### Build
