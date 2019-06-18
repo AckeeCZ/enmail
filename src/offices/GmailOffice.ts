@@ -1,28 +1,17 @@
 import { defaultsDeep } from 'lodash';
 import * as nodemailer from 'nodemailer';
 import MailerMail = require('nodemailer/lib/mailer');
-import * as SMTPPool from 'nodemailer/lib/smtp-pool';
-import {ServiceType} from '../createOffice';
+import { Credentials } from 'nodemailer/lib/smtp-connection';
+import { Options } from 'nodemailer/lib/xoauth2';
+import { ServiceType } from '../createOffice';
 import { Mail, MailType } from '../Mail';
 import { Office } from './Office';
 
-type GmailAuthOptions = GmailLoginOptions | GmailOAuth2Options;
+export type GmailAuthOptions = Credentials | Options;
 
 export enum GmailAuthType {
     login = 'login',
     oauth2= 'oauth2',
-}
-
-export interface GmailLoginOptions {
-    user: string;
-    pass: string;
-}
-
-export interface GmailOAuth2Options {
-    user: string;
-    clientId: string;
-    clientSecret: string;
-    refreshToken: string;
 }
 
 export type GmailOfficeOptions = {
@@ -32,11 +21,11 @@ export type GmailOfficeOptions = {
 } & (
     | {
     authType: GmailAuthType.login;
-    settings: GmailLoginOptions;
+    settings: Credentials;
 }
     | {
     authType: GmailAuthType.oauth2;
-    settings: GmailOAuth2Options;
+    settings: Options;
 });
 
 export class GmailOffice extends Office {
@@ -49,7 +38,7 @@ export class GmailOffice extends Office {
                 ...options.settings,
                 type: options.authType,
             },
-        } as SMTPPool.Options);
+        });
         super(mailer);
     }
     public send(mail: Mail): Promise<nodemailer.SentMessageInfo> {

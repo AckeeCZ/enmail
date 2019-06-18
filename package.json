@@ -18,7 +18,7 @@
     "@types/intl": "^1.2.0",
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.11.4",
-    "@types/nodemailer": "^4.6.5",
+    "@types/nodemailer": "^4.6.8",
     "@types/request": "^2.47.1",
     "@types/request-promise": "^4.1.42",
     "date-fns-timezone": "^0.1.4",
