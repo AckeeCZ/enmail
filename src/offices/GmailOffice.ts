@@ -33,11 +33,11 @@ export class GmailOffice extends Office {
     constructor(options: GmailOfficeOptions) {
         const definedMailer = options.mailer || nodemailer;
         const mailer = definedMailer.createTransport({
-            service: ServiceType.gmail,
             auth: {
                 ...options.settings,
                 type: options.authType,
             },
+            service: ServiceType.gmail,
         });
         super(mailer);
     }
