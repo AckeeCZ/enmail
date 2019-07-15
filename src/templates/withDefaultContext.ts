@@ -37,12 +37,13 @@ export const withDefaultContext = (context: any = {}) => {
     return defaults(defaultContext, context);
 };
 
-const shiftUtcDate = (d: any, t: any) => {
+const shiftUtcDate = (d: any, t: string) => {
     const dateFormat = 'YYYY-MM-DD HH:mm:ss';
     if (!d) {
         return d;
     }
     if (t) {
+        t = t.toLowerCase() !== 'utc' ? t : 'UTC'; // IANA tz alias for Etc/UTC
         return new Date(formatToTimeZone(d, dateFormat, { timeZone: t }));
     }
     return new Date(d);
