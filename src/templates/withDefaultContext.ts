@@ -1,6 +1,6 @@
+import { formatToTimeZone } from 'date-fns-timezone';
 import * as intl from 'intl';
 import { defaults } from 'lodash';
-import * as moment from 'moment';
 
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';
@@ -37,12 +37,14 @@ export const withDefaultContext = (context: any = {}) => {
     return defaults(defaultContext, context);
 };
 
-const shiftUtcDate = (d: any, t: any) => {
+const shiftUtcDate = (d: any, t: string) => {
+    const dateFormat = 'YYYY-MM-DD HH:mm:ss';
     if (!d) {
         return d;
     }
     if (t) {
-        return new Date(moment.utc(d).tz(t).format('YYYY-MM-DD HH:mm:ss'));
+        t = t.toLowerCase() !== 'utc' ? t : 'UTC'; // IANA tz alias for Etc/UTC
+        return new Date(formatToTimeZone(d, dateFormat, { timeZone: t }));
     }
-    return new Date(moment.utc(d).format('YYYY-MM-DD HH:mm:ss'));
+    return new Date(d);
 };

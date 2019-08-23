@@ -12,15 +12,17 @@ const nodemailerMock = require('nodemailer-mock');
 describe('Test createOffice', () => {
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
-            pass: 'test',
-            type: GmailOffice.GmailAuthType.login,
-            user: 'test',
+            authType: GmailOffice.GmailAuthType.login,
             mailer: nodemailerMock,
+            settings: {
+                pass: 'test',
+                user: 'test',
+            },
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
                 service: ServiceType.gmail,
+                settings: data,
             }, 'gmail'))
             .then(() => {
                 expect(instances.get('gmail'));
@@ -37,15 +39,17 @@ describe('Test createOffice', () => {
     });
     it('Test GmailOffice', () => {
         const data: GmailOffice.GmailOfficeOptions = {
-            pass: 'test',
-            type: GmailOffice.GmailAuthType.login,
-            user: 'test',
+            authType: GmailOffice.GmailAuthType.login,
             mailer: nodemailerMock,
+            settings: {
+                pass: 'test',
+                user: 'test',
+            },
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
                 service: ServiceType.gmail,
+                settings: data,
             }, 'gmail'))
             .then(() => {
                 expect(instances.get('gmail'));
@@ -66,8 +70,8 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
                 service: ServiceType.fcm,
+                settings: data,
             }, 'fcm'))
             .then(() => {
                 expect(instances.get('fcm'));
@@ -95,8 +99,8 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
                 service: ServiceType.onesignal,
+                settings: data,
             }, 'onesignal'))
             .then(() => {
                 expect(instances.get('onesignal'));
@@ -123,8 +127,8 @@ describe('Test createOffice', () => {
         };
         return Promise.resolve()
             .then(() => createOffice({
-                data,
                 service: ServiceType.sendgrid,
+                settings: data,
             }, 'sendgrid'))
             .then(() => {
                 expect(instances.get('sendgrid'));

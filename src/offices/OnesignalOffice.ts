@@ -81,7 +81,7 @@ export class OnesignalOffice extends Office {
         method: 'POST',
         uri: 'https://onesignal.com/api/v1/notifications',
     })
-    private translated = (item: Nullable<string>) => {
+    private translated = (item?: string) => {
         if (isPlainObject(item)) {
             return item;
         }

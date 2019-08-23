@@ -5,10 +5,10 @@ export enum MailType {
 }
 
 export interface Mail {
-    from: Nullable<string>;
-    content: Nullable<string>;
+    from?: string;
+    content?: string;
     mailerOptions?: any;
-    subject: Nullable<string>;
-    to: Nullable<string>;
+    subject?: string;
+    to?: string;
     type: MailType;
 }

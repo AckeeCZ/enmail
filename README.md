@@ -8,13 +8,18 @@ Handles message communication with end users through various means of messages -
 
 > Neither snow nor rain nor heat nor gloom of night stays these couriers from the swift completion of their appointed rounds
 
-GitHub repository: [https://github.com/AckeeCZ/enmail](https://github.com/AckeeCZ/enmail)
-
 ## Install
 
 ```bash
 npm i --save enmail
 ```
+
+## Supported services, their settings and examples
+
+- [Gmail](./GMAIL.md)
+- [Sendgrid](./SENDGRID.md)
+- [Firebase Cloud Messaging](./FCM.md)
+- [OneSignal](./ONESIGNAL.md)
 
 ## Quickstart
 
@@ -32,10 +37,12 @@ import {
 // instance under given key. If none key given, is saved under a 'default' name.
 createOffice({
     service: ServiceType.gmail,
-    data: {
-        type: GmailAuthType.login, // GmailAuthType.oauth2
-        user: 'test@gmail.com',
-        pass: '******',
+    settings: {
+        authType: GmailAuthType.login, // GmailAuthType.oauth2
+        settings: {
+            user: 'test@gmail.com',
+            pass: '******',
+        },
     },
 });
 // Mail object providing universal message container used throughout
@@ -55,88 +62,6 @@ getOffice()
     .catch(e => /* ... */)
 // ...
 ```
-
-## Supported transports and ini options
-
-- `gmail` (`GmailOfficeOptions`)
-    ```typescript
-    {
-        accessToken?: string;
-        accessUrl?: string;
-        clientId?: string;
-        clientSecret?: string;
-        expires?: number;
-        pass?: string;
-        privateKey?: string;
-        refreshToken?: string;
-        serviceClient?: string;
-        type: GmailAuthType; // login or oauth2 - enum
-        user: string;
-        mailer?: any;
-    }
-    ```
-
-- `sendgrid` (`SendgridOfficeOptions`)
-    ```typescript
-    {
-        apiKey: string;
-    }
-    ```
-
-- `onesignal` (`OnesignalOfficeOptions`)
-    ```typescript
-    {
-        apiKey: string;
-        appId: string;
-    }
-    ```
-
-- `fcm` (`FcmOfficeOptions`)
-    ```typescript
-    {
-        authorizationKey: string;
-    }
-    ```
-
-### FCM
-
-```typescript
-// Channel send: Recipient `channel=<channelName>`
-send({ to: `channel=myChannelName`/*, ...*/ });
-// Device notification (registration ids). May be an array.
-send({ to: `3qwesdfzklxc`/*, ...*/ });
-```
-`Mail.subject` is used as the `notification.title`, `Mail.body` as the message `notification.content`.
-
-Any other options that should be passed to request should be put to `Mail.mailerOptions`. Those are merged with the root of fcm request. E.g., to supply data and sound, use
-```typescript
-mail.mailerOptions = {
-    data: {/* ... */},
-    notification: { sound: 'default' }
-}
-```
-
-If you dont want to use the `notification` object, you can set it on `null` then `notification` object will be ignored.
-
-### OneSignal
-
-```typescript
-// Channel/Segment send: Recipient `channel=<channelName>`. May be an array.
-send({ to: `channel=myChannelName`/*, ...*/ });
-// Device notification (player ids). May be an array.
-send({ to: `3qwesdfzklxc`/*, ...*/ });
-```
-Any other options that should be passed to request should be put to `Mail.mailerOptions`. Those are merged with the root of OneSignal request body. E.g., to supply filters and sound, use
-```typescript
-mail.mailerOptions = {
-    filters: [/* ... */],
-    android_sound: 'default',
-}
-```
-
-### Sendgrid
-
-Would be same as `gmail`, you only need to change `ServiceType.gmail` and add your `apiKey`
 
 ## Concept
 
