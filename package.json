@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha ./dist/test/**/*.js",
     "build": "tsc -p .",
-    "lint": "tslint -p . --force"
+    "lint": "tslint -p . --force",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Jiri Smolik <jiri.smolik@ackee.cz>",
   "contributors": [
@@ -26,7 +28,8 @@
     "lodash": "^4.17.11",
     "nodemailer": "4.6.3",
     "request": "2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
@@ -39,5 +42,6 @@
     "tslint": "^5.16.0",
     "tslint-config-ackee": "^0.1.1",
     "typescript": "^3.4.3"
-  }
+  },
+  "snyk": true
 }
