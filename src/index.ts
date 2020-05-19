@@ -1,17 +1,25 @@
-import { get } from 'lodash';
-import { instances } from './createOffice';
-import { Office } from './offices/Office';
+import { createSendgrid } from './lib/adapters/SendgridAdapter';
+import { Adapter, AdapterSend, Message, SendMessage } from './lib/enmail';
 
-export { createOffice, ServiceOptions, ServiceType, WrappedOffice } from './createOffice';
-export { Mail, MailType } from './Mail';
-export { FcmMailer, FcmOffice, FcmOfficeOptions } from './offices/FcmOffice';
-export { GmailAuthType, GmailOffice, GmailOfficeOptions } from './offices/GmailOffice';
-export { OnesignalMailer, OnesignalOffice, OnesignalOfficeOptions } from './offices/OnesignalOffice';
-export { Mailer, Office, OfficeOptions, OfficeResult } from './offices/Office';
-export { SendgridMailer, SendgridOffice, SendgridOfficeOptions } from './offices/SendgridOffice';
-export { compileLodashFileTemplate } from './templates/compileLodashFileTemplate';
-export { compileLodashTemplate } from './templates/compileLodashTemplate';
-export { withDefaultContext } from './templates/withDefaultContext';
+export {
+    Adapter,
+    AdapterSend,
+    Message,
+    SendMessage,
+} from './lib/enmail';
 
-export const getWrappedOffice = (ident?: string) => instances.get(ident || 'default');
-export const getOffice = (ident?: string) => get(instances.get(ident || 'default'), 'office') as Office;
+const send: SendMessage = (message, sendFn, sendOptions) => {
+    if (typeof sendFn === 'function') {
+        return sendFn(message);
+    }
+    return sendFn.sender()(message, sendOptions);
+};
+const sender = <AdapterOptions, SendOptions>(adapter: Adapter<AdapterOptions, SendOptions>) => adapter.sender;
+
+export default {
+    send,
+    sender,
+    createAdapter: {
+        sendgrid: createSendgrid,
+    },
+};
