@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sendgrid adapter Sendgrid adapter can be created 1`] = `
+Object {
+  "mailService": MailService {
+    "MailService": [Function],
+    "client": Client {
+      "auth": "Bearer SG.apiKey",
+      "defaultHeaders": Object {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "sendgrid/7.1.1;nodejs",
+      },
+      "defaultRequest": Object {
+        "baseUrl": "https://api.sendgrid.com/",
+        "headers": Object {},
+        "maxContentLength": Infinity,
+        "method": "GET",
+        "url": "",
+      },
+      "impersonateSubuser": "",
+    },
+    "secretRules": Array [],
+    "substitutionWrappers": Array [
+      "{{",
+      "}}",
+    ],
+  },
+  "options": Object {
+    "apiKey": "SG.apiKey",
+  },
+  "sender": [Function],
+}
+`;
