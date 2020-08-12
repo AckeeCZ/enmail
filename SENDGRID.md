@@ -15,35 +15,42 @@
 ### Usage
 
 ```typescript
-import {
-    createOffice,
-    getOffice,
-    Mail,
-    MailType,
-    ServiceType 
-} from 'enmail';
+import enmail from 'enmail';
 
-// Create an office with your sendgrid `apiKey`
-createOffice({
-    service: ServiceType.gmail,
-    settings: {
-        apiKey: 'your_api_key',
-    },
-});
-
-// Prepare an email
-const mail: Mail = {
-    from: 'me@gmail.com',
-    to: 'example@test.org',
-    type: MailType.HTML, // MailType.TEXT
-    subject: 'Hello, its me',
-    content: `<p>I was wondering if after all these years you'd like to meet to go over everything ...</p>`,
-    // optional: mailerOptions
+const body = {
+    to: 'test@example.com',
+    from: 'me@example.com',
+    content: 'Hello enmail!',
+    subject: 'Hello',
 };
+const sendgridAdapter = enmail.createAdapter.sendgrid({ apiKey: 'YOUR_API_KEY' });
+enmail.send(body, sendgridAdapter)
+    .then(() => 'Email was sent!')
+    .catch(error => console.log(error.message));
+```
 
-// Send it
-getOffice()
-    .send(mail)
-    .then(res => /* ... */)
-    .catch(e => /* ... */)
+* Alternatively you can use adapter's `sender` to send an email:
+
+```typescript
+const sendgridAdapter = enmail.createAdapter.sendgrid({ apiKey: 'YOUR_API_KEY' });
+sendgridAdapter.sender()(body)
+    .then()
+    .catch();
+
+// Pass send options to it
+const sendOptions = { mailSettings: { sandboxMode: { enable: true } } }; // sendgrid options
+sendgridAdapter.sender(sendOptions)(body);
+// or
+sendgridAdapter.sender()(body, sendOptions);
+```
+
+* You can also use original Sendgrid sender
+
+```typescript
+const sendgridAdapter = enmail.createAdapter.sendgrid({ apiKey: 'YOUR_API_KEY' });
+const sender = sendgridAdapter.mailService; // Sendgrid instance
+const { content, ...message } = body;
+sender.send({ ...message, html: content })
+    .then()
+    .catch();
 ```
