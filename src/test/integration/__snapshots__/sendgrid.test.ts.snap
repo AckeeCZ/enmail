@@ -3,13 +3,16 @@
 exports[`Sendgrid adapter Sendgrid adapter can be created 1`] = `
 Object {
   "mailService": MailService {
-    "MailService": [Function],
+    "MailService": [MockFunction],
     "client": Client {
-      "auth": "Bearer SG.apiKey",
+      "auth": "",
+      "constructor": [MockFunction],
+      "createHeaders": [MockFunction],
+      "createRequest": [MockFunction],
       "defaultHeaders": Object {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Agent": "sendgrid/7.1.1;nodejs",
+        "User-Agent": "sendgrid/7.2.3;nodejs",
       },
       "defaultRequest": Object {
         "baseUrl": "https://api.sendgrid.com/",
@@ -19,12 +22,40 @@ Object {
         "url": "",
       },
       "impersonateSubuser": "",
+      "isString": [MockFunction],
+      "isValidApiKey": [MockFunction],
+      "isValidTwilioAuth": [MockFunction],
+      "request": [MockFunction],
+      "setApiKey": [MockFunction],
+      "setDefaultHeader": [MockFunction],
+      "setDefaultRequest": [MockFunction],
+      "setImpersonateSubuser": [MockFunction],
+      "setTwilioEmailAuth": [MockFunction],
     },
+    "constructor": [MockFunction],
+    "filterSecrets": [MockFunction],
     "secretRules": Array [],
-    "substitutionWrappers": Array [
-      "{{",
-      "}}",
-    ],
+    "send": [MockFunction],
+    "sendMultiple": [MockFunction],
+    "setApiKey": [MockFunction] {
+      "calls": Array [
+        Array [
+          "SG.apiKey",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    },
+    "setClient": [MockFunction],
+    "setSecretRules": [MockFunction],
+    "setSubstitutionWrappers": [MockFunction],
+    "setTimeout": [MockFunction],
+    "setTwilioEmailAuth": [MockFunction],
+    "substitutionWrappers": Array [],
   },
   "options": Object {
     "apiKey": "SG.apiKey",
