@@ -55,9 +55,4 @@ describe('Sendgrid adapter', () => {
         const sendgridMessage = await adapter.mailService.send({ ...rest, html: content }) as any;
         expect(Object.keys(sendgridMessage).sort()).toEqual(['to', 'from', 'subject', 'html'].sort());
     });
-    it('An email can be sent via mailService', async () => {
-        const { content, ...rest } = body;
-        const [{ statusCode }] = await adapter.mailService.send({ ...rest, html: content }) as any;
-        expect(statusCode).toEqual(200);
-    });
 });
