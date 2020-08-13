@@ -3,6 +3,10 @@ import { createNodemailer, NodemailerMessage, NodemailerOptions } from './lib/ad
 import { createSendgrid, SendgridMessage, SendgridOptions } from './lib/adapters/SendgridAdapter';
 import { Adapter, AdapterSend, Message, SendMessage } from './lib/enmail';
 
+export { compileLodashFileTemplate } from './lib/templates/compileLodashFileTemplate';
+export { compileLodashTemplate } from './lib/templates/compileLodashTemplate';
+export { withDefaultContext } from './lib/templates/withDefaultContext';
+
 export {
     Adapter,
     AdapterSend,
