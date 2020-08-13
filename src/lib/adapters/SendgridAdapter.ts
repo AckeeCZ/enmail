@@ -2,6 +2,7 @@ import { MailData, MailDataRequired } from '@sendgrid/helpers/classes/mail';
 import * as sendgrid from '@sendgrid/mail';
 import { Adapter, AdapterSend } from '../enmail';
 
+export type SendgridMessage = MailData;
 export interface SendgridOptions {
     apiKey: string;
 }
@@ -13,7 +14,7 @@ export const createSendgrid = (adapterOptions: SendgridOptions): Adapter<Sendgri
         options: adapterOptions,
         mailService: sendgrid,
         sender: (sendOptions) => {
-            const send: AdapterSend<Partial<MailData>> = (message, options) => {
+            const send: AdapterSend<Partial<SendgridMessage>> = (message, options) => {
                 const { content, ...rest } = message;
                 const msg = {
                     ...rest,
