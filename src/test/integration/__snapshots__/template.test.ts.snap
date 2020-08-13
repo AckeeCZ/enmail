@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template Compile lodash template 1`] = `
+"            <a href=\\"https://ackee.cz\\">#202001 Invoice (Wed, 7/1/2020, 4:50 PM)</a>
+            <span>Price: <strong>€125.78</strong></span>
+        "
+`;
