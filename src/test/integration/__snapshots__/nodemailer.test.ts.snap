@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nodemailer adapter Gmail adapter can be created 1`] = `
+Object {
+  "mailService": Object {
+    "sendMail": [MockFunction],
+  },
+  "options": Object {
+    "auth": Object {
+      "pass": "********",
+      "type": "login",
+      "user": "test2@example.com",
+    },
+    "service": "gmail",
+  },
+  "sender": [Function],
+}
+`;
