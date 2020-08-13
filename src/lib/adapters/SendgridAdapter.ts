@@ -7,7 +7,7 @@ export interface SendgridOptions {
     apiKey: string;
 }
 
-export const createSendgrid = (adapterOptions: SendgridOptions): Adapter<SendgridOptions, Partial<MailData>, sendgrid.MailService> => {
+export const createSendgrid = (adapterOptions: SendgridOptions): Adapter<SendgridOptions, Partial<SendgridMessage>, sendgrid.MailService> => {
     const sender = sendgrid;
     sender.setApiKey(adapterOptions.apiKey);
     return {
