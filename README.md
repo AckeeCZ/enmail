@@ -17,6 +17,7 @@ npm install enmail
 ## Supported services
 
 - [Sendgrid](./SENDGRID.md)
+- [Nodemailer](./NODEMAILER.md)
 
 ## Quickstart
 
