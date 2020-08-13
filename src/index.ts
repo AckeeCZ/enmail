@@ -1,4 +1,5 @@
-import { createSendgrid } from './lib/adapters/SendgridAdapter';
+import { createNodemailer, NodemailerOptions } from './lib/adapters/NodemailerAdapter';
+import { createSendgrid, SendgridOptions } from './lib/adapters/SendgridAdapter';
 import { Adapter, AdapterSend, Message, SendMessage } from './lib/enmail';
 
 export {
@@ -16,10 +17,12 @@ const send: SendMessage = (message, sendFn, sendOptions) => {
 };
 const sender = <AdapterOptions, SendOptions, MailService>(adapter: Adapter<AdapterOptions, SendOptions, MailService>) => adapter.sender;
 
+export { NodemailerOptions, SendgridOptions };
 export default {
     send,
     sender,
     createAdapter: {
         sendgrid: createSendgrid,
+        nodemailer: createNodemailer,
     },
 };
