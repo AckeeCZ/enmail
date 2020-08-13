@@ -28,6 +28,7 @@
     "@types/jest": "^26.0.9",
     "@types/lodash": "^4.14.159",
     "@types/nock": "^11.1.0",
+    "@types/nodemailer": "^6.4.0",
     "jest": "^26.3.0",
     "nock": "^13.0.4",
     "ts-jest": "^26.2.0",
