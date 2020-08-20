@@ -14,7 +14,7 @@ const send: SendMessage = (message, sendFn, sendOptions) => {
     }
     return sendFn.sender()(message, sendOptions);
 };
-const sender = <AdapterOptions, SendOptions>(adapter: Adapter<AdapterOptions, SendOptions>) => adapter.sender;
+const sender = <AdapterOptions, SendOptions, MailService>(adapter: Adapter<AdapterOptions, SendOptions, MailService>) => adapter.sender;
 
 export default {
     send,
