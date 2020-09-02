@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha ./dist/test/**/*.js",
+    "test": "jest --detectOpenHandles --verbose --forceExit",
+    "test:coverage": "npm run test -- --collectCoverage",
     "build": "tsc -p .",
     "lint": "tslint -p . --force"
   },
@@ -14,30 +15,21 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@sendgrid/mail": "6.2.1",
-    "@types/intl": "^1.2.0",
-    "@types/lodash": "^4.14.116",
-    "@types/node": "^10.11.4",
-    "@types/nodemailer": "^4.6.8",
-    "@types/request": "^2.47.1",
-    "@types/request-promise": "^4.1.42",
+    "@sendgrid/mail": "^7.2.3",
     "date-fns-timezone": "^0.1.4",
     "intl": "^1.2.5",
-    "lodash": "^4.17.11",
-    "nodemailer": "4.6.3",
-    "request": "2.88.0",
-    "request-promise": "^4.2.2"
+    "lodash": "^4.17.19",
+    "request-promise": "^4.2.5"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.5",
-    "@types/nock": "^9.3.0",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "nock": "^10.0.6",
-    "nodemailer-mock": "^1.3.14",
-    "tslint": "^5.16.0",
-    "tslint-config-ackee": "^0.1.1",
-    "typescript": "^3.4.3"
+    "@types/intl": "^1.2.0",
+    "@types/jest": "^26.0.9",
+    "@types/lodash": "^4.14.159",
+    "@types/nock": "^11.1.0",
+    "jest": "^26.3.0",
+    "nock": "^13.0.4",
+    "ts-jest": "^26.2.0",
+    "tslint-config-ackee": "^0.3.0",
+    "typescript": "^3.9.7"
   }
 }
