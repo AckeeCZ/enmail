@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Firebase cloud messaging adapter Fcm adapter can be created 1`] = `
+Object {
+  "mailService": Object {
+    "sendMulticast": [MockFunction],
+  },
+  "options": Object {
+    "projectId": "projectId",
+    "serviceAccountId": "serviceAccountId",
+  },
+  "sender": [Function],
+}
+`;
