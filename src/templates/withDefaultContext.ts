@@ -5,7 +5,7 @@ import { defaults } from 'lodash';
 export const withDefaultContext = (context: any = {}) => {
     const locale: string = context.locale || 'en-US';
     const defaultTz = context.tz || 'UTC';
-    const dateTimeFormat = { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric' };
+    const dateTimeFormat = { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric' } as const;
 
     const defaultContext = {
         // common var for translation
