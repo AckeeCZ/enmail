@@ -1,3 +1,10 @@
+<div align="center">
+
+## DEPRECATION NOTICE
+
+This package is no longer maintained.
+</div>
+
 # enmail
 
 [![Build Status](https://travis-ci.org/AckeeCZ/enmail.svg?branch=master)](https://travis-ci.org/AckeeCZ/enmail)
